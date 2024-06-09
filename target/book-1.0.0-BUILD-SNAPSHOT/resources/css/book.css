@@ -1,0 +1,20 @@
+table, th, td {
+     text-align: center;
+ }
+
+.none_btn {
+    background-color:transparent;
+    border: none;
+}
+
+.onderline-border {
+
+    border-width: 0 0 1px;
+
+}
+
+.readonly-text {
+
+    color : #5e5e5e;
+
+}
