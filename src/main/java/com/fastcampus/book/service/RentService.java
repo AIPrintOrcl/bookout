@@ -1,16 +1,14 @@
 package com.fastcampus.book.service;
 
-import com.fastcampus.book.controller.CustController;
-import com.fastcampus.book.controller.RentController;
-import com.fastcampus.book.dao.CustDao;
-import com.fastcampus.book.dao.RentDao;
-import com.fastcampus.book.domain.MemberDto;
-import com.fastcampus.book.domain.RentDto;
-import com.fastcampus.book.domain.RentPriceDto;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.fastcampus.book.controller.RentController;
+import com.fastcampus.book.dao.RentDao;
+import com.fastcampus.book.domain.RentDto;
+import com.fastcampus.book.domain.RentPriceDto;
 
 @Service
 public class RentService {

@@ -21,7 +21,6 @@ public class CustController {
 
 	@GetMapping("/write")
 	public String write(Model m) {
-
 		Integer cust_no = custService.getLastCustNo(); // 마지막 고객번호
 
 		m.addAttribute("cust_no", cust_no);
@@ -31,7 +30,6 @@ public class CustController {
 
 	@GetMapping("/modify")
 	public String modify(Integer cust_no, Model m) {
-
 		MemberDto memberDto = custService.getCustInfo(cust_no); // 고객정보
 
 		m.addAttribute("memberDto", memberDto);
@@ -41,11 +39,6 @@ public class CustController {
 
 	@PostMapping("/writeEvent")
 	public String writeEvent(MemberDto memberDto, String msg, Model m) {
-		if("WRITE_FAIL".equals(msg)) {
-			m.addAttribute("memberDto", memberDto);
-			return "write";
-		}
-
 		custService.writeCust(memberDto);
 
 		return "redirect:/custListModify";
@@ -53,12 +46,6 @@ public class CustController {
 
 	@PostMapping("/modifyEvent")
 	public String modifyEvent(MemberDto memberDto, String msg, Model m) {
-
-		if("WRITE_FAIL".equals(msg)) {
-			m.addAttribute("memberDto", memberDto);
-			return "write";
-		}
-
 		custService.modifyCust(memberDto);
 
 		return "redirect:/custListModify";
@@ -66,7 +53,6 @@ public class CustController {
 
 	@GetMapping("/custListModify")
 	public String custListModify(Model m) {
-
 		List<MemberDto> list = custService.getCustList();
 
 		m.addAttribute("list", list);

@@ -19,6 +19,10 @@
 			border: 1px solid #0f0f0f;
 			top: 50%;
 			left: 50%;
+			padding: 20px;
+		}
+		.button {
+			margin-top: 10px;
 		}
 	</style>
 </head>
@@ -45,13 +49,15 @@
 					<h2 style="text-align: center;">${param.mode=="M" ? "고객수정" : "고객등록"}</h2>
 					<div class="container inner-div">
 						<form id="writeForm" action="">
-							<div>고객번호 : <input class="onderline-border " type="text" id="cust_no" name="cust_no" value="${param.mode=="M" ? param.cust_no : cust_no}" readonly> </div>
+							<div>고객번호 : <input class="onderline-border" style="color : #929090;" type="text" id="cust_no" name="cust_no" value="${param.mode=="M" ? param.cust_no : cust_no}" readonly> </div>
 							<div>고객이름 : <input class="onderline-border" type="text" id="cust_name" name="cust_name" value="${param.mode=="M" ? memberDto.cust_name : ''}"> </div>
 							<div>전화번호 : <input class="onderline-border" type="text" id="phone" name="phone" value="${param.mode=="M" ? memberDto.phone : ''}"> </div>
 							<div>이메일 : <input class="onderline-border" type="text" id="cust_email" name="cust_email" value="${param.mode=="M" ? memberDto.cust_email : ''}"> </div>
 							<div>고객등급(P,G,S) : <input class="onderline-border" type="text" id="grade" name="grade" value="${param.mode=="M" ? memberDto.grade : ''}"> </div>
-							<button type="button" id="btn_write">${param.mode=="M" ? "[수정]" : "[등록]"}</button>
-							<button type="button" id="btn_cancell">[취소]</button>
+							<div class="button">
+								<button type="button" id="btn_write">${param.mode=="M" ? "[수정]" : "[등록]"}</button>
+								<button type="button" id="btn_cancell">[취소]</button>
+							</div>
 						</form>
 					</div>
 				</td>
@@ -83,6 +89,11 @@
 				return false;
 			}
 
+			if(form.cust_email.value.trim()=="") {
+				alert("이메일을 입력해주세요.");
+				form.cust_email.focus();
+				return false;
+			}
 
 			if(!(form.grade.value=="P" || form.grade.value=="G" || form.grade.value=="S")) {
 				alert("고객등급은 P,G,S 중에 입력하셔야합니다.");
@@ -106,6 +117,18 @@
 					form.attr("method", "post");
 					form.submit();
 				}
+			}
+		})
+
+		$('#btn_cancell').on("click", function (){
+			if(${param.mode=="M"}) { // 고객 수정
+				location.href="<c:url value='/custListModify'/>"
+			}
+			if(${param.mode!="M"}) {// 고객 등록
+				$('#cust_name').val("");
+				$('#phone').val("");
+				$('#cust_email').val("");
+				$('#grade').val("");
 			}
 		})
 	})//ready
